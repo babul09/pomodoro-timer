@@ -4,9 +4,11 @@ import Controls from './components/Controls/controls'
 import TimerDisplay from './components/TimerDisplay/timerdisplay'
 import Button from './components/Button/button'
 import Settings from './components/Settings/settings'
+import TextComponent from './components/TextComponent';
 import { useState, useEffect } from 'react';
 import useSound from 'use-sound'
 import timesUpSfx from './sounds/timesUp.mp3'
+
 
 
 function App() {
@@ -16,10 +18,31 @@ function App() {
   const [ shortLength, setShortLength ] = useState(3)
   const [ longLength, setLongLength ] = useState(15)
   const [ fontPref, setFontPref ] = useState('kumbh')         // options: kumbh, roboto, space
-  const [ accentColor, setAccentColor ] = useState('default') // options: default, blue, purple
+  const [ accentColor, setAccentColor ] = useState('default') 
   const [ secondsLeft, setSecondsLeft] = useState(pomoLength * 60)
   const [ isActive, setIsActive ] = useState(false)
   const [ buttonText, setButtonText ] = useState('START')
+  const [history, setHistory] = useState([]);
+  const [startTime, setStartTime] = useState(null);
+
+  const handleTimerStart = () => {
+    const currentTime = new Date();
+    const options = { hour: '2-digit', minute: '2-digit', second:'2-digit', hour12: true };
+    const timeString = currentTime.toLocaleTimeString('en-US', options);
+    
+    setStartTime(timeString);
+  };
+
+  const handleTimerEnd = () => {
+    const currentTime = new Date();
+    const options = { hour: '2-digit', minute: '2-digit', second:'2-digit', hour12: true };
+    const timeString = currentTime.toLocaleTimeString('en-US', options);
+  
+    setHistory(prevHistory => [
+      ...prevHistory, 
+      `Timer started at ${startTime}, ended at ${timeString}. Mode: ${timerMode}`
+    ]);
+  };
 
   const [ volume, setVolume ] = useState(1)
   const [ timesUp ] = useSound(timesUpSfx, {
@@ -37,6 +60,7 @@ function App() {
         setIsActive(false)
         setButtonText('')
         timesUp()
+        handleTimerEnd();
       }
 
       return () => clearInterval(interval)
@@ -73,6 +97,7 @@ function App() {
   return (
     <div className="pomodoro-app">
       <Header title="Pomodoro Timer" />
+      <h3 className="subheader">by Babul</h3>
       <Controls
         timerMode={timerMode}
         setTimerMode={setTimerMode}
@@ -95,7 +120,11 @@ function App() {
         setButtonText={setButtonText}
         volume={volume}
         setVolume={setVolume}
+        onEnd={handleTimerEnd}
         />
+         <TextComponent
+         history={history} 
+          />
       <Button type="settings" toggleVisibility={toggleSettingsVisibility} />
       <Settings visible={settingsVisible}
                 toggleSettingsVisibility={toggleSettingsVisibility} 

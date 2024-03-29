@@ -11,10 +11,10 @@
 
 :root {
   --accent-color: #f87070;
-  --background-body: #e7e3e3;
+  --background-body: #c2b28325;
   --text: #ffd6ba;
   --text-dark: #000000;
-  --background-preferences: #ffffff;
+  --background-preferences: #ff9b9b;
   --input-background: #726262;
   --background-timer: #7c8299;
   --settings-heading: #161932;
@@ -31,13 +31,29 @@
 html,
 body {
   height: 100%;
+  background-image: url(Untitledtomato\ \(2\).svg);
+  animation: pan 90s linear infinite;
+}
+@keyframes pan {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+  
 }
 
 body {
   display: flex;
   justify-content: center;
   background: var(--background-body);
-}
+  
+  
+ }
+
+
+
 
 .pomodoro-app {
   display: flex;
@@ -62,6 +78,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   background: var(--background-timer);
+  box-shadow: -3px -3px 5px var(--accent-color), 3px 3px 5px var(--accent-color);
   border-radius: 20px;
   width: 480px;
   min-height: 60px;
@@ -115,10 +132,13 @@ h1 {
   width: 300px;
   height: 300px;
   border-radius: 20%;
+  margin-bottom: 50px;
   background: #555b6e;
-  /*box-shadow: -50px -50px 100px rgb(45	52	48), 50px 50px 100px #2c6e49;*/
+  box-shadow: -10px -10px 20px var(--accent-color), 10px 10px 20px var(--accent-color);
   cursor: pointer;
 }
+
+
 
 .timer:active {
   transform: scale(0.98);
