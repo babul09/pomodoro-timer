@@ -3,8 +3,8 @@ import MuteToggle from '../MuteToggle/mutetoggle'
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import useSound from 'use-sound'
-import startSfx from '../../sounds/startTimer.mp3'
-import pauseSfx from '../../sounds/pauseTimer.mp3'
+import startSfx from '../../sounds/start.wav'
+import pauseSfx from '../../sounds/pause.wav'
 
 const TimerDisplay = ({ timerMode,
                         percentage,

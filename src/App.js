@@ -7,7 +7,7 @@ import Settings from './components/Settings/settings'
 /*import TextComponent from './components/TextComponent';*/
 import { useState, useEffect } from 'react';
 import useSound from 'use-sound'
-import timesUpSfx from './sounds/timesUp.mp3'
+import timesUpSfx from './sounds/timup.wav'
 import HistoryBox from './components/HistoryBox';
 
 
