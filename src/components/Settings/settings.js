@@ -69,7 +69,7 @@ const Settings = ({ visible,
             <h3>Time (Minutes)</h3>
             <div action="" className="time-settings__form">
               <label htmlFor="pomodoro">pomodoro</label>
-              <input type="number" name="pomodoro" id="pomodoro" min="5" max="90" defaultValue={pomoLength} />
+              <input type="number" name="pomodoro" id="pomodoro" min="0.1" max="90" defaultValue={pomoLength} />
               <label htmlFor="short-break">short break</label>
               <input type="number" name="shortBreak" id="short-break" min="1" max="14" defaultValue={shortLength} />
               <label htmlFor="long-break">long break</label>

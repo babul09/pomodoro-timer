@@ -4,10 +4,11 @@ import Controls from './components/Controls/controls'
 import TimerDisplay from './components/TimerDisplay/timerdisplay'
 import Button from './components/Button/button'
 import Settings from './components/Settings/settings'
-import TextComponent from './components/TextComponent';
+/*import TextComponent from './components/TextComponent';*/
 import { useState, useEffect } from 'react';
 import useSound from 'use-sound'
 import timesUpSfx from './sounds/timesUp.mp3'
+import HistoryBox from './components/HistoryBox';
 
 
 
@@ -22,8 +23,19 @@ function App() {
   const [ secondsLeft, setSecondsLeft] = useState(pomoLength * 60)
   const [ isActive, setIsActive ] = useState(false)
   const [ buttonText, setButtonText ] = useState('START')
-  const [history, setHistory] = useState([]);
   const [startTime, setStartTime] = useState(null);
+  
+  const modeLabels = {
+    'pomo': 'Pomodoro',
+    'short': 'Short Break',
+    'long': 'Long Break'
+  };
+
+  useEffect(() => {
+    if (isActive) {
+      handleTimerStart();
+    }
+  }, [isActive]);
 
   const handleTimerStart = () => {
     const currentTime = new Date();
@@ -38,10 +50,24 @@ function App() {
     const options = { hour: '2-digit', minute: '2-digit', second:'2-digit', hour12: true };
     const timeString = currentTime.toLocaleTimeString('en-US', options);
   
-    setHistory(prevHistory => [
-      ...prevHistory, 
-      `Timer started at ${startTime}, ended at ${timeString}. Mode: ${timerMode}`
-    ]);
+    setHistory(prevHistory => {
+      const newHistory = [
+        ...prevHistory, 
+        `Timer started at ${startTime}, ended at ${timeString}. Mode:  ${modeLabels[timerMode]}`
+      ];
+      localStorage.setItem('timerHistory', JSON.stringify(newHistory));
+      return newHistory;
+    });
+  };
+
+  const [history, setHistory] = useState(() => {
+    const savedHistory = localStorage.getItem('timerHistory');
+    return savedHistory ? JSON.parse(savedHistory) : [];
+    
+  });
+
+  const clearHistory = () => {
+    setHistory([]); // This will clear the history
   };
 
   const [ volume, setVolume ] = useState(1)
@@ -122,9 +148,7 @@ function App() {
         setVolume={setVolume}
         onEnd={handleTimerEnd}
         />
-         <TextComponent
-         history={history} 
-          />
+         <HistoryBox history={history} setHistory={setHistory} />
       <Button type="settings" toggleVisibility={toggleSettingsVisibility} />
       <Settings visible={settingsVisible}
                 toggleSettingsVisibility={toggleSettingsVisibility} 

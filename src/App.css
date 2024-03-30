@@ -47,7 +47,7 @@ body {
 body {
   display: flex;
   justify-content: center;
-  background: var(--background-body);
+  background-color: var(--background-body);
   
   
  }
@@ -187,6 +187,48 @@ button:focus:not(:focus-visible) {
   margin-right: -15px; 
   transition: transform 0.9s ease-in-out;
   cursor: pointer;
+}
+
+.history-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+}
+
+.history-container button {
+  padding: 10px 20px; /* Add some padding to the button */
+  font-size: 16px;
+  font-weight: bold; /* Increase the font size */
+  color: black; /* Change the text color to white */
+  background-color: var(--accent-color); /* Change the background color to blue */
+  border: 2px solid black; /* Remove the border */
+  border-radius: 20px; /* Add rounded corners */
+  cursor: pointer; /* Change the cursor when hovering over the button */
+}
+
+.history-container button:hover {
+  background-color: #0056b3; /* Change the background color when hovering over the button */
+}
+
+.history-box {
+  display: flex;
+  flex-direction: column;
+  width: 480px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  
+}
+
+.history-items-container {
+  background: var(--background-timer);
+  border-radius: 20px;
+}
+
+.history-item {
+  padding: 10px;
+  border: 2px solid #000000;
+  border-radius: 20px;
 }
 
 .pomodoro-app__preferences {
