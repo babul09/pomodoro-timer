@@ -3,8 +3,8 @@
 This project is a Pomodoro Timer built with React. The Pomodoro Technique is a time management method that uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. Here I've created two break modes. The breaks are of 15 mins and 3 mins.
 
 ## Screenshot
-![Screenshot of the app](.ss1.png)
-![Screenshot2 of the app](.ss2.png)
+![Screenshot of the app](ss1.png)
+![Screenshot2 of the app](ss2.png)
 
 
 ## Features
